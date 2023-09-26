@@ -1,0 +1,48 @@
+---
+- name: Install OSX command line tools
+  include_role:
+    name: elliotweiser.osx-command-line-tools
+  when: ansible_distribution == "MacOSX"
+
+- name: Create directory ~/.local/bin/
+  file:
+    path: "{{ ansible_env.HOME }}/.local/bin"
+    state: directory
+
+- name: Install zsh
+  import_tasks: zsh.yml
+
+- name: Install CLI tools in Ubuntu
+  become: true
+  apt:
+    name:
+      - tmux
+      - jq
+      - htop
+      - python3-pip
+      - unzip
+      - xclip
+    state: present
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install CLI tools in Manjaro
+  become: true
+  pacman:
+    name:
+      - tmux
+      - jq
+      - htop
+      - python3-pip
+      - xclip
+    state: present
+  when: ansible_distribution == "Manjaro"
+
+- name: Install CLI tools in macOS
+  loop:
+    - tmux
+    - jq
+    - htop
+  community.general.homebrew:
+    name: "{{ item }}"
+    state: present
+  when: ansible_distribution == "MacOSX"
