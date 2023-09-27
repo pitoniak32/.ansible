@@ -1,0 +1,24 @@
+# This file is a playbook.
+
+# This is a play.
+- name: Bootstrap development environment
+  hosts: localhost # In this case localhost is the controller, and node.
+  tasks:
+    - import_role:
+        name: dotfiles
+  
+    - name: test
+      tags: test
+      ansible.builtin.debug:
+        msg: "{{ lookup('ansible.builtin.env', 'HOME')}}/.dotfiles"
+
+  # - ansible.builtin.apt:
+  #     update_cache: true
+  #     name:
+  #       - git
+  #     state: present
+  #   become: yes
+  #   when: ansible_distribution == "Ubuntu"
+
+  # - import_role:
+  #     name: programs
