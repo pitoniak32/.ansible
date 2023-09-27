@@ -1,6 +1,14 @@
 - name: clone .dotfiles from github
   ansible.builtin.git:
     repo: git@github.com:pitoniak32/.dotfiles.git
-    dest: "{{ lookup('ansible.builtin.env', 'HOME')}}/.dotfiles"
+    dest: '{{ bare_repo_dir }}'
     bare: true
     version: main
+
+# Need to see if this is required
+# - name: checkout worktree in HOME
+#   ansible.builtin.shell:
+#     cmd: '/usr/bin/git'
+#     args:
+#       - '--git-dir={{ home_path }}/.dotfiles'
+#       - '--work-tree={{ home_path }}'

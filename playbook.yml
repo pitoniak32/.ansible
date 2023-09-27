@@ -3,9 +3,22 @@
 # This is a play.
 - name: Bootstrap development environment
   hosts: localhost # In this case localhost is the controller, and node.
+  vars: 
+    home_path: "{{ lookup('ansible.builtin.env', 'HOME')}}"
+    xdg_vars:
+      config_home: "{{ home_path }}/.config/"
+      cache_home: "{{ home_path }}/.cache/"
+      data_home: "{{ home_path }}/.local/share/"
+      state_home: "{{ home_path }}/.local/state/"
   tasks:
     - import_role:
+        name: prep_for_dotfiles
+
+    - import_role:
         name: dotfiles
+
+    - import_role:
+        name: zsh
   
     - name: test
       tags: test

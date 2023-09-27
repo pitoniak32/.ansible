@@ -4,8 +4,7 @@
 ansible to init a new machine
 
 ## TODO
-- [ ] setup zsh-* in `$XDG_DATA_HOME/zsh/`
-  - [ ] How to get `$XDG_DATA_HOME` before sourcing `.zshrc`
+- [ ] Order of operations when installing zsh
 - [ ] Add Dockerfile for testing setup on linux
 
 # How to use

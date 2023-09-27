@@ -1,0 +1,13 @@
+- name: Install zsh-* repos into XDG_DATA_HOME
+  ansible.builtin.git:
+    repo: 'https://github.com/zsh-users/{{ item }}.git'
+    dest: "{{ xdg_dirs.data_home }}/{{ item }}"
+  loop:
+    - "zsh-autosuggestions"
+    - "zsh-syntax-highlighting"
+    - "zsh-completions"
+
+- name: test
+  tags: test
+  debug:
+    msg: "{{ xdg_vars.data_home }}"

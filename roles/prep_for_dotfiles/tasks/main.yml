@@ -1,0 +1,5 @@
+- name: Ensure XDG directories exist
+  ansible.builtin.file:
+    path: '{{ item }}'
+    state: directory
+  loop: "{{ xdg_vars | dict2items }}"
