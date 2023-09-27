@@ -46,3 +46,6 @@
     name: "{{ item }}"
     state: present
   when: ansible_distribution == "MacOSX"
+
+- name: Install rustup
+  import_tasks: rust.yml
