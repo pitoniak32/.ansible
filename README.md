@@ -5,6 +5,7 @@ ansible to init a new machine
 
 ## TODO
 - [ ] setup zsh-* in `$XDG_DATA_HOME/zsh/`
+- [ ] Add Dockerfile for testing setup on linux
 
 # How to use
 1. install git 
