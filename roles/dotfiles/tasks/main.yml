@@ -1,7 +1,7 @@
 - name: clone .dotfiles from github
   ansible.builtin.git:
     repo: git@github.com:pitoniak32/.dotfiles.git
-    dest: '{{ bare_repo_dir }}'
+    dest: '{{ home_path }}/.dotfiles'
     bare: true
     version: main
 
