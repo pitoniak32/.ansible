@@ -5,11 +5,11 @@
     name:
       - zsh
     state: present
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_distribution == "MacOSX"
 
 - name: Install zsh in Ubuntu
   become: true
-  apt:
+  ansible.builtin.apt:
     name:
       - zsh
     state: present
@@ -17,7 +17,7 @@
 
 - name: Install zsh in Manjaro
   become: true
-  pacman:
+  ansible.builtin.pacman:
     name:
       - zsh
     state: present

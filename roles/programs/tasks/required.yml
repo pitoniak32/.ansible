@@ -1,0 +1,19 @@
+- name: Install Required CLI tools in Ubuntu
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+    name:
+      - jq
+      - gpg
+      - curl
+      - python3-apt
+    state: present
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install Required CLI tools in MacOSX
+  become: true
+  community.general.homebrew:
+    name:
+      - jq
+    state: present
+  when: ansible_distribution == "MacOSX"

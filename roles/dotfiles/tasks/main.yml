@@ -1,14 +1,11 @@
 - name: clone .dotfiles from github
   ansible.builtin.git:
-    repo: git@github.com:pitoniak32/.dotfiles.git
+    repo: https://github.com/pitoniak32/.dotfiles.git 
     dest: '{{ home_path }}/.dotfiles'
     bare: true
     version: main
 
 # Need to see if this is required
-# - name: checkout worktree in HOME
-#   ansible.builtin.shell:
-#     cmd: '/usr/bin/git'
-#     args:
-#       - '--git-dir={{ home_path }}/.dotfiles'
-#       - '--work-tree={{ home_path }}'
+- name: checkout worktree in HOME
+  ansible.builtin.shell:
+    cmd: '/usr/bin/git --git-dir={{ home_path }}/.dotfiles --work-tree={{ home_path }}'

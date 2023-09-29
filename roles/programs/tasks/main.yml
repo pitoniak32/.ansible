@@ -1,19 +1,5 @@
 ---
-# - name: Install zsh
-#   tags: zsh
-#   import_tasks: zsh.yml
-#
-- name: Install CLI tools in Ubuntu
-  become: true
-  ansible.builtin.apt:
-    name:
-      - tmux
-      - jq
-      - htop
-      - xclip
-    state: present
-  when: ansible_distribution == "Ubuntu"
-#
-# - name: Install rustup
-#   tags: rust
-#   import_tasks: rust.yml
+- import_tasks: required.yml
+- import_tasks: extras.yml
+- import_tasks: zsh.yml
+- import_tasks: rust.yml

@@ -15,3 +15,6 @@ ansible to init a new machine
 2. clone this repo `git clone git@github.com:pitoniak32/.ansible.git`
 3. run `./bootstrap.sh`
 
+# Run in Docker container
+1. Run `docker build . -t ansible && docker run --entrypoint=/bin/bash -it ansible`.
+2. From in the docker container run `./bootstrap.sh` to run the ansible playbook.

@@ -3,3 +3,28 @@
     path: '{{ item.value }}'
     state: directory
   loop: "{{ xdg_vars | dict2items }}"
+  tags: 
+  - core
+
+- name: add git-core ppa
+  become: true
+  ansible.builtin.apt_repository:
+    repo: ppa:nginx/stable
+    state: present
+    update_cache: false
+  when: ansible_distribution == "Ubuntu"
+  tags: 
+  - core
+  - git-latest
+  - ppa
+
+- name: update git
+  become: true
+  ansible.builtin.apt:
+    name: git
+    update_cache: true
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+  tags:
+  - core
+  - git-latest

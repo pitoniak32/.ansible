@@ -12,6 +12,9 @@
       state_home: "{{ home_path }}/.local/state/"
   tasks:
     - import_role:
+        name: programs
+
+    - import_role:
         name: prep_for_dotfiles
 
     - import_role:

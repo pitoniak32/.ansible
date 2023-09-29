@@ -1,0 +1,19 @@
+- name: Install Extra CLI tools in Ubuntu
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+    name:
+      - tmux
+      - htop
+      - xclip
+    state: present
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install Extra CLI tools in MacOSX
+  become: true
+  community.general.homebrew:
+    name:
+      - tmux
+      - htop
+    state: present
+  when: ansible_distribution == "MacOSX"
