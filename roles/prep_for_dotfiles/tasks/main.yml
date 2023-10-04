@@ -1,30 +1,34 @@
-- name: Ensure XDG directories exist
+- name: Ensure core XDG directories exist
   ansible.builtin.file:
-    path: '{{ item.value }}'
+    path: "{{ item }}"
     state: directory
-  loop: "{{ xdg_vars | dict2items }}"
+  with_list:
+    - '{{ansible_env.XDG_CONFIG_HOME}}'
+    - '{{ansible_env.XDG_CACHE_HOME}}'
+    - '{{ansible_env.XDG_DATA_HOME}}'
+    - '{{ansible_env.XDG_STATE_HOME}}'
   tags: 
   - core
 
-- name: add git-core ppa
-  become: true
-  ansible.builtin.apt_repository:
-    repo: ppa:nginx/stable
-    state: present
-    update_cache: false
-  when: ansible_distribution == "Ubuntu"
-  tags: 
-  - core
-  - git-latest
-  - ppa
+# - name: add git-core ppa
+#   become: true
+#   ansible.builtin.apt_repository:
+#     repo: ppa:git-core/stable
+#     state: present
+#     update_cache: false
+#   when: ansible_distribution == "Ubuntu"
+#   tags: 
+#   - core
+#   - git-latest
+#   - ppa
 
-- name: update git
-  become: true
-  ansible.builtin.apt:
-    name: git
-    update_cache: true
-    state: latest
-  when: ansible_distribution == "Ubuntu"
-  tags:
-  - core
-  - git-latest
+# - name: update git
+#   become: true
+#   ansible.builtin.apt:
+#     name: git
+#     update_cache: true
+#     state: latest
+#   when: ansible_distribution == "Ubuntu"
+#   tags:
+#   - core
+#   - git-latest

@@ -4,7 +4,7 @@
 - name: Clone zsh-* repos into XDG_DATA_HOME
   ansible.builtin.git:
     repo: 'https://github.com/zsh-users/{{ item }}.git'
-    dest: "{{ xdg_vars.data_home }}/{{ item }}"
+    dest: "{{ ansible_env.XDG_DATA_HOME }}/zsh/{{ item }}"
     version: master
     update: true
   loop:

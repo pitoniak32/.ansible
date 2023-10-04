@@ -1,0 +1,13 @@
+# These need to be defined as vars so they are available for the env vars that need their values.
+# using the lookup('ansible.builtin.env', 'VAR_NAME') does not work for vars that are added by the playbook.
+env_vars:
+  XDG_CONFIG_HOME: "{{lookup('ansible.builtin.env', 'HOME')}}/.config"
+  XDG_CACHE_HOME: "{{lookup('ansible.builtin.env', 'HOME')}}/.cache"
+  XDG_DATA_HOME: "{{lookup('ansible.builtin.env', 'HOME')}}/.local/share"
+  XDG_STATE_HOME: "{{lookup('ansible.builtin.env', 'HOME')}}/.local/state"
+  XDG_DATA_DIRS: "/usr/local/share:/usr/share"
+  XDG_CONFIG_DIRS: "/etc/xdg"
+  ZDOTDIR: "{{lookup('ansible.builtin.env', 'HOME')}}/.config/zsh"
+
+# Programs that will be installed through cargo as package manager.
+cargo_programs: 'starship bat'

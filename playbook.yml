@@ -3,38 +3,24 @@
 # This is a play.
 - name: Bootstrap development environment
   hosts: localhost # In this case localhost is the controller, and node.
-  vars: 
-    home_path: "{{ lookup('ansible.builtin.env', 'HOME')}}"
-    xdg_vars:
-      config_home: "{{ home_path }}/.config/"
-      cache_home: "{{ home_path }}/.cache/"
-      data_home: "{{ home_path }}/.local/share/"
-      state_home: "{{ home_path }}/.local/state/"
-  tasks:
-    - import_role:
-        name: programs
-
-    - import_role:
-        name: prep_for_dotfiles
-
-    - import_role:
-        name: dotfiles
-
-    - import_role:
-        name: zsh
-  
-    - name: test
-      tags: test
-      ansible.builtin.debug:
-        msg: "{{ lookup('ansible.builtin.env', 'HOME')}}/.dotfiles"
-
-  # - ansible.builtin.apt:
-  #     update_cache: true
-  #     name:
-  #       - git
-  #     state: present
-  #   become: yes
-  #   when: ansible_distribution == "Ubuntu"
-
-  # - import_role:
-  #     name: programs
+  vars_files: variables.yml
+  environment:
+    XDG_CONFIG_HOME: "{{ env_vars.XDG_CONFIG_HOME }}"
+    XDG_CACHE_HOME: "{{ env_vars.XDG_CACHE_HOME }}"
+    XDG_DATA_HOME: "{{ env_vars.XDG_DATA_HOME }}"
+    XDG_STATE_HOME: "{{ env_vars.XDG_STATE_HOME }}"
+    XDG_DATA_DIRS: "/usr/local/share:/usr/share"
+    XDG_CONFIG_DIRS: "/etc/xdg"
+    ZDOTDIR: "{{ env_vars.ZDOTDIR }}"
+    SHELL_SESSION_DISABLE: 1
+    HISTFILE: "{{ env_vars.XDG_STATE_HOME }}/zsh/history"
+    HISTSIZE: 1200000
+    SAVEHIST: 1000000
+    STARSHIP_CONFIG: "{{ env_vars.XDG_CONFIG_HOME }}/starship/starship.toml"
+    CARGO_HOME: "{{ env_vars.XDG_DATA_HOME }}/cargo"
+    RUSTUP_HOME: "{{ env_vars.XDG_DATA_HOME }}/rustup"
+  roles:
+    - prep_for_dotfiles
+    - programs
+    - dotfiles
+    - zsh

@@ -1,11 +1,16 @@
 - name: clone .dotfiles from github
   ansible.builtin.git:
     repo: https://github.com/pitoniak32/.dotfiles.git 
-    dest: '{{ home_path }}/.dotfiles'
+    dest: "{{ ansible_env.HOME }}/.dotfiles"
     bare: true
     version: main
+
+- name: remove .zshenv
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.zshenv"
+    state: absent
 
 # Need to see if this is required
 - name: checkout worktree in HOME
   ansible.builtin.shell:
-    cmd: '/usr/bin/git --git-dir={{ home_path }}/.dotfiles --work-tree={{ home_path }}'
+    cmd: "/usr/bin/git --git-dir={{ ansible_env.HOME }}/.dotfiles --work-tree={{ ansible_env.HOME }} checkout"

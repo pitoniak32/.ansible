@@ -1,7 +1,17 @@
+- debug:
+    msg: "{{ansible_env}}"
+
 - name: check if cargo is installed
-  shell: command -v cargo
+  shell: which cargo
   register: cargo_exists
   ignore_errors: yes
+  tags:
+    - rust
+
+- debug:
+    msg: "{{cargo_exists}}"
+  tags:
+    - rust
 
 - name: Download Installer
   when: cargo_exists is failed
@@ -16,5 +26,10 @@
 - name: install rust/cargo
   when: cargo_exists is failed
   shell: /tmp/sh.rustup.rs -y
+  tags:
+    - rust
+
+- name: Install rust programs
+  shell: ". {{ ansible_env.CARGO_HOME }}/env && cargo install --locked {{ cargo_programs }}"
   tags:
     - rust
