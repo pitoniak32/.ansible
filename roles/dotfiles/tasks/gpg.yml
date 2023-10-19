@@ -1,0 +1,67 @@
+- name: Copy personal gpg secret key to new machine
+  ansible.builtin.copy:
+    content: '{{ vault_secret_gpg_personal }}'
+    dest: './secret_gpg_personal.gpg'
+    mode: '0644'
+  tags: 
+  - gpg
+  - keys
+  - vault
+  - core
+
+- name: import personal gpg secret key to new machine
+  ansible.builtin.command: >
+    gpg --passphrase {{ gpg_passphrase_personal }}
+        --pinentry-mode loopback
+        --import ./secret_gpg_personal.gpg
+  tags: 
+  - gpg
+  - keys
+  - vault
+  - core
+
+- name: Copy personal gpg public key to new machine
+  ansible.builtin.copy:
+    content: '{{ vault_public_gpg_personal }}'
+    dest: './public_gpg_personal.gpg'
+    mode: '0644'
+  tags: 
+  - gpg
+  - keys
+  - vault
+  - core
+
+- name: import personal gpg public key to new machine
+  ansible.builtin.command: >
+    gpg --passphrase {{ gpg_passphrase_personal }}
+        --pinentry-mode loopback
+        --import ./public_gpg_personal.gpg
+  tags: 
+  - gpg
+  - keys
+  - vault
+  - core
+
+- name: Copy work gpg secret key to new machine
+  ansible.builtin.copy:
+    content: '{{ vault_secret_gpg_work }}'
+    dest: '{{ansible_env.HOME}}/.ssh/id_rsa'
+    mode: '0644'
+  tags: 
+  - gpg
+  - work
+  - keys
+  - vault
+  - core
+
+- name: Copy work gpg public key to new machine
+  ansible.builtin.copy:
+    content: '{{ vault_public_gpg_work }}'
+    dest: '{{ansible_env.HOME}}/.ssh/id_rsa'
+    mode: '0644'
+  tags: 
+  - gpg
+  - work
+  - keys
+  - vault
+  - core

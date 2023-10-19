@@ -10,9 +10,6 @@
   tags: 
   - core
 
-- import_tasks: ssh.yml
-- import_tasks: gpg.yml
-
 # - name: add git-core ppa
 #   become: true
 #   ansible.builtin.apt_repository:

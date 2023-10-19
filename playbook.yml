@@ -3,7 +3,10 @@
 # This is a play.
 - name: Bootstrap development environment
   hosts: localhost # In this case localhost is the controller, and node.
-  vars_files: variables.yml
+  vars_files: 
+    - variables.yml
+    - personal.yml
+    # - work.yml
   environment:
     XDG_CONFIG_HOME: "{{ env_vars.XDG_CONFIG_HOME }}"
     XDG_CACHE_HOME: "{{ env_vars.XDG_CACHE_HOME }}"
