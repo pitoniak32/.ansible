@@ -1,0 +1,31 @@
+- name: Ensure ssh dir exists
+  ansible.builtin.file:
+    path: '{{ansible_env.HOME}}/.ssh'
+    state: directory
+  tags: 
+  - ssh
+  - keys
+  - vault
+  - core
+
+- name: Copy ssh private key to new machine
+  ansible.builtin.copy:
+    content: '{{ vault_ssh_private }}'
+    dest: '{{ansible_env.HOME}}/.ssh/id_rsa'
+    mode: '0644'
+  tags: 
+  - ssh
+  - keys
+  - vault
+  - core
+
+- name: Copy ssh public key to new machine
+  ansible.builtin.copy:
+    content: '{{ vault_ssh_public }}'
+    dest: '{{ansible_env.HOME}}/.ssh/id_rsa.pub'
+    mode: '0644'
+  tags: 
+  - ssh
+  - keys
+  - vault
+  - core
