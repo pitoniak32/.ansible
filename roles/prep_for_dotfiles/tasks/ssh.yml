@@ -3,11 +3,6 @@
     path: '{{ansible_env.HOME}}/.ssh'
     state: directory
     mode: '700'
-  tags: 
-  - ssh
-  - keys
-  - vault
-  - core
 
 - name: Copy personal ssh private key to new machine
   no_log: true
@@ -16,10 +11,7 @@
     dest: '{{ansible_env.HOME}}/.ssh/id_ed25519_personal'
     mode: '600'
   tags: 
-  - ssh
-  - keys
   - vault
-  - core
 
 - name: Copy personal ssh public key to new machine
   no_log: true
@@ -28,10 +20,7 @@
     dest: '{{ansible_env.HOME}}/.ssh/id_ed25519_personal.pub'
     mode: '644'
   tags: 
-  - ssh
-  - keys
   - vault
-  - core
 
 - name: Copy work ssh private key to new machine
   no_log: true
@@ -40,11 +29,7 @@
     dest: '{{ansible_env.HOME}}/.ssh/id_ed25519_work'
     mode: '600'
   tags: 
-  - ssh
-  - work
-  - keys
   - vault
-  - core
 
 - name: Copy work ssh public key to new machine
   no_log: true
@@ -53,8 +38,4 @@
     dest: '{{ansible_env.HOME}}/.ssh/id_ed25519_work.pub'
     mode: '644'
   tags: 
-  - ssh
-  - keys
-  - work
   - vault
-  - core

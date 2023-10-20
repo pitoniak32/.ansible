@@ -5,10 +5,7 @@
     dest: './secret_gpg_personal.gpg'
     mode: '0644'
   tags: 
-  - gpg
-  - keys
   - vault
-  - core
 
 - name: import personal gpg secret key to new machine
   no_log: true
@@ -17,20 +14,12 @@
         --pinentry-mode loopback
         --import ./secret_gpg_personal.gpg
   tags: 
-  - gpg
-  - keys
   - vault
-  - core
 
 - name: Remove personal gpg secret key from new machine
   ansible.builtin.file:
     path: './secret_gpg_personal.gpg'
     state: absent
-  tags: 
-  - gpg
-  - keys
-  - vault
-  - core
 
 - name: Copy personal gpg public key to new machine
   no_log: true
@@ -39,10 +28,7 @@
     dest: './public_gpg_personal.gpg'
     mode: '0644'
   tags: 
-  - gpg
-  - keys
   - vault
-  - core
 
 - name: import personal gpg public key to new machine
   no_log: true
@@ -51,17 +37,9 @@
         --pinentry-mode loopback
         --import ./public_gpg_personal.gpg
   tags: 
-  - gpg
-  - keys
   - vault
-  - core
 
 - name: Remove personal gpg public key from new machine
   ansible.builtin.file:
     path: './public_gpg_personal.gpg'
     state: absent
-  tags: 
-  - gpg
-  - keys
-  - vault
-  - core

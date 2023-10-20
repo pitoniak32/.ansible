@@ -1,20 +1,16 @@
-- import_tasks: ssh.yml
-- import_tasks: gpg.yml
-
-- name: clone .dotfiles from github
+- name: Clone .dotfiles from github
   ansible.builtin.git:
     repo: https://github.com/pitoniak32/.dotfiles.git 
     dest: "{{ ansible_env.HOME }}/.dotfiles"
     bare: true
     version: main
 
-- name: remove .zshenv
+- name: Remove .zshenv to allow checkout of .dotfiles
   ansible.builtin.file:
     path: "{{ ansible_env.HOME }}/.zshenv"
     state: absent
 
-# Need to see if this is required
-- name: checkout worktree in HOME
+- name: Checkout worktree in HOME
   ansible.builtin.shell:
     cmd: "/usr/bin/git --git-dir={{ ansible_env.HOME }}/.dotfiles --work-tree={{ ansible_env.HOME }} checkout"
 

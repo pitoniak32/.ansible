@@ -1,5 +1,6 @@
 - name: Install ZSH
-  apt: name=zsh
+  apt:
+    name: zsh
 
 - name: Clone zsh-* repos into XDG_DATA_HOME
   ansible.builtin.git:
@@ -13,7 +14,7 @@
     - "zsh-completions"
 
 - name: Change user shell to zsh 
-  become: yes
+  become: true
   user:
     name: "{{ ansible_user_id }}"
     shell: "/usr/bin/zsh"

@@ -10,8 +10,6 @@
       - python3-apt
     state: present
   when: ansible_distribution == "Ubuntu"
-  tags:
-    - core
 
 - name: Install Required CLI tools in MacOSX
   become: true
@@ -20,5 +18,3 @@
       - jq
     state: present
   when: ansible_distribution == "MacOSX"
-  tags:
-    - core

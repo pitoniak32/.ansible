@@ -1,9 +1,13 @@
 ---
 - import_tasks: required.yml
+  tags:
+    - core
 - import_tasks: extras.yml
 - import_tasks: zsh.yml
   tags:
+    - core
     - zsh
 - import_tasks: rust.yml
   tags:
+    - core
     - rust
