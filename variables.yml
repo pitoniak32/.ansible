@@ -10,4 +10,4 @@ env_vars:
   ZDOTDIR: "{{lookup('ansible.builtin.env', 'HOME')}}/.config/zsh"
 
 # Programs that will be installed through cargo as package manager.
-cargo_programs: 'starship bat'
+cargo_programs: 'starship bat rg'
