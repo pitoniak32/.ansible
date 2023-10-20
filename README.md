@@ -1,11 +1,10 @@
-
-
 # .ansible
-ansible to init a new machine
+ansible-playbook to configure a new machine
 
-## TODO
-- [ ] Order of operations when installing zsh
-- [ ] Add Dockerfile for testing setup on linux
+## Read To Go!
+- Ubuntu : YES
+- MacOS  : NO
+- Manjaro: NO
 
 # How to use
 1. install git 
