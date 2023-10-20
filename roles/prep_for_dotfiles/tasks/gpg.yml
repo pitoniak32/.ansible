@@ -7,7 +7,7 @@
   tags: 
   - vault
 
-- name: import personal gpg secret key to new machine
+- name: Import personal gpg secret key to new machine
   no_log: true
   ansible.builtin.command: >
     gpg --passphrase {{ gpg_passphrase_personal }}
@@ -16,7 +16,7 @@
   tags: 
   - vault
 
-- name: Remove personal gpg secret key from new machine
+- name: Remove personal gpg secret key temp-file
   ansible.builtin.file:
     path: './secret_gpg_personal.gpg'
     state: absent
@@ -30,7 +30,7 @@
   tags: 
   - vault
 
-- name: import personal gpg public key to new machine
+- name: Import personal gpg public key to new machine
   no_log: true
   ansible.builtin.command: >
     gpg --passphrase {{ gpg_passphrase_personal }}
@@ -39,7 +39,61 @@
   tags: 
   - vault
 
-- name: Remove personal gpg public key from new machine
+- name: Remove personal gpg public key temp-file
   ansible.builtin.file:
     path: './public_gpg_personal.gpg'
     state: absent
+
+- name: Copy work gpg secret key to new machine
+  no_log: true
+  ansible.builtin.copy:
+    content: '{{ vault_secret_gpg_work }}'
+    dest: './secret_gpg_work.gpg'
+    mode: '0644'
+  tags: 
+  - vault
+  - work
+
+- name: Import work gpg secret key to new machine
+  no_log: true
+  ansible.builtin.command: >
+    gpg --passphrase {{ gpg_passphrase_work }}
+        --pinentry-mode loopback
+        --import ./secret_gpg_work.gpg
+  tags: 
+  - vault
+  - work
+
+- name: Remove work gpg secret key temp-file
+  ansible.builtin.file:
+    path: './secret_gpg_work.gpg'
+    state: absent
+  tags:
+    - work
+
+- name: Copy work gpg public key to new machine
+  no_log: true
+  ansible.builtin.copy:
+    content: '{{ vault_public_gpg_work }}'
+    dest: './public_gpg_work.gpg'
+    mode: '0644'
+  tags: 
+  - vault
+  - work
+
+- name: Import work gpg public key to new machine
+  no_log: true
+  ansible.builtin.command: >
+    gpg --passphrase {{ gpg_passphrase_work }}
+        --pinentry-mode loopback
+        --import ./public_gpg_work.gpg
+  tags: 
+  - vault
+  - work
+
+- name: Remove work gpg public key temp-file
+  ansible.builtin.file:
+    path: './public_gpg_work.gpg'
+    state: absent
+  tags:
+    - work
