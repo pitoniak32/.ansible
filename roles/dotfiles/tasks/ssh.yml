@@ -2,6 +2,7 @@
   ansible.builtin.file:
     path: '{{ansible_env.HOME}}/.ssh'
     state: directory
+    mode: '700'
   tags: 
   - ssh
   - keys
@@ -12,8 +13,8 @@
   no_log: true
   ansible.builtin.copy:
     content: '{{ vault_private_ssh_personal }}'
-    dest: '{{ansible_env.HOME}}/.ssh/id_rsa'
-    mode: '0644'
+    dest: '{{ansible_env.HOME}}/.ssh/id_ed25519_personal'
+    mode: '600'
   tags: 
   - ssh
   - keys
@@ -24,8 +25,8 @@
   no_log: true
   ansible.builtin.copy:
     content: '{{ vault_public_ssh_personal }}'
-    dest: '{{ansible_env.HOME}}/.ssh/id_rsa.pub'
-    mode: '0644'
+    dest: '{{ansible_env.HOME}}/.ssh/id_ed25519_personal.pub'
+    mode: '644'
   tags: 
   - ssh
   - keys
@@ -36,8 +37,8 @@
   no_log: true
   ansible.builtin.copy:
     content: '{{ vault_private_ssh_work }}'
-    dest: '{{ansible_env.HOME}}/.ssh/id_rsa'
-    mode: '0644'
+    dest: '{{ansible_env.HOME}}/.ssh/id_ed25519_work'
+    mode: '600'
   tags: 
   - ssh
   - work
@@ -49,8 +50,8 @@
   no_log: true
   ansible.builtin.copy:
     content: '{{ vault_public_ssh_work }}'
-    dest: '{{ansible_env.HOME}}/.ssh/id_rsa.pub'
-    mode: '0644'
+    dest: '{{ansible_env.HOME}}/.ssh/id_ed25519_work.pub'
+    mode: '644'
   tags: 
   - ssh
   - keys

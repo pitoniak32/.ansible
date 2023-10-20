@@ -2,4 +2,8 @@
 - import_tasks: required.yml
 - import_tasks: extras.yml
 - import_tasks: zsh.yml
+  tags:
+    - zsh
 - import_tasks: rust.yml
+  tags:
+    - rust
