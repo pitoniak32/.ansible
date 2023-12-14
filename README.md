@@ -17,3 +17,9 @@ ansible-playbook to configure a new machine
 # Run in Docker container
 1. Run `docker build . -t ansible && docker run --entrypoint=/bin/bash -it ansible`.
 2. From in the docker container run `./bootstrap.sh` to run the ansible playbook.
+
+## You can select tasks with
+To only run tasks that would add personal ssh keys:
+```
+ansible-playbook playbook.yml -Kvv --tags "ssh-personal"
+```

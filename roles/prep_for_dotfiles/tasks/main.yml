@@ -10,15 +10,29 @@
   tags: 
   - core
 
-- import_tasks: ssh.yml
+- import_tasks: ssh-personal.yml
   tags:
     - core
-    - ssh
+    - vault
+    - ssh-personal
 
-- import_tasks: gpg.yml
+- import_tasks: gpg-personal.yml
   tags:
     - core
-    - gpg
+    - vault
+    - gpg-personal
+
+- import_tasks: ssh-work.yml
+  tags:
+    - core
+    - vault
+    - ssh-work
+
+- import_tasks: gpg-work.yml
+  tags:
+    - core
+    - vault
+    - gpg-work
 
 
 # - name: add git-core ppa

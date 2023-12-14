@@ -1,3 +1,6 @@
+- include_vars:
+    file: vars/personal.yml
+
 - name: Ensure ssh dir exists
   ansible.builtin.file:
     path: '{{ansible_env.HOME}}/.ssh'
@@ -10,8 +13,6 @@
     content: '{{ vault_private_ssh_personal }}'
     dest: '{{ansible_env.HOME}}/.ssh/id_ed25519_personal'
     mode: '600'
-  tags: 
-  - vault
 
 - name: Copy personal ssh public key to new machine
   no_log: true
@@ -19,25 +20,4 @@
     content: '{{ vault_public_ssh_personal }}'
     dest: '{{ansible_env.HOME}}/.ssh/id_ed25519_personal.pub'
     mode: '644'
-  tags: 
-  - vault
 
-- name: Copy work ssh private key to new machine
-  no_log: true
-  ansible.builtin.copy:
-    content: '{{ vault_private_ssh_work }}'
-    dest: '{{ansible_env.HOME}}/.ssh/id_ed25519_work'
-    mode: '600'
-  tags: 
-  - vault
-  - work
-
-- name: Copy work ssh public key to new machine
-  no_log: true
-  ansible.builtin.copy:
-    content: '{{ vault_public_ssh_work }}'
-    dest: '{{ansible_env.HOME}}/.ssh/id_ed25519_work.pub'
-    mode: '644'
-  tags: 
-  - vault
-  - work
