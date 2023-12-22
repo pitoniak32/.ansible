@@ -18,7 +18,8 @@
 - name: Install zsh in Manjaro
   become: true
   ansible.builtin.pacman:
+    update_cache: true
     name:
       - zsh
     state: present
-  when: ansible_distribution == "Manjaro"
+  when: ansible_distribution == "Archlinux"

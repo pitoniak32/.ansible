@@ -2,14 +2,12 @@
     file: vars/personal.yml
 
 - name: Copy personal gpg secret key to new machine
-  no_log: true
   ansible.builtin.copy:
     content: '{{ vault_secret_gpg_personal }}'
     dest: './secret_gpg_personal.gpg'
     mode: '0644'
 
 - name: Import personal gpg secret key to new machine
-  no_log: true
   ansible.builtin.command: >
     gpg --passphrase {{ gpg_passphrase_personal }}
         --pinentry-mode loopback
@@ -20,14 +18,12 @@
     path: './secret_gpg_personal.gpg'
     state: absent
 - name: Copy personal gpg public key to new machine
-  no_log: true
   ansible.builtin.copy:
     content: '{{ vault_public_gpg_personal }}'
     dest: './public_gpg_personal.gpg'
     mode: '0644'
 
 - name: Import personal gpg public key to new machine
-  no_log: true
   ansible.builtin.command: >
     gpg --passphrase {{ gpg_passphrase_personal }}
         --pinentry-mode loopback

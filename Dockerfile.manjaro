@@ -1,0 +1,19 @@
+FROM manjarolinux/base
+
+RUN pacman -Syu --noconfirm && \
+  pacman -Sy --noconfirm \
+  git \
+  vim \
+  ansible
+
+# Add non-root user with sudo ability and trivial password
+# Never do this on an actual computer...
+RUN echo '%wheel ALL=(ALL:ALL) ALL' > /etc/sudoers
+RUN useradd --create-home davidpi --group wheel && echo "davidpi:p" | chpasswd
+USER davidpi
+
+WORKDIR /tmp
+
+COPY . .
+
+ENTRYPOINT ./bootstrap.sh

@@ -11,24 +11,28 @@
   - core
 
 - import_tasks: ssh-personal.yml
+  no_log: true
   tags:
     - core
     - vault
     - ssh-personal
 
 - import_tasks: gpg-personal.yml
+  no_log: true
   tags:
     - core
     - vault
     - gpg-personal
 
 - import_tasks: ssh-work.yml
+  no_log: true
   tags:
     - core
     - vault
     - ssh-work
 
 - import_tasks: gpg-work.yml
+  no_log: true
   tags:
     - core
     - vault

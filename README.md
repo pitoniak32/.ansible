@@ -1,7 +1,7 @@
 # .ansible
 ansible-playbook to configure a new machine
 
-## Read To Go!
+## Ready To Go!
 - Ubuntu : YES
 - MacOS  : NO
 - Manjaro: NO
@@ -15,8 +15,10 @@ ansible-playbook to configure a new machine
 3. run `./bootstrap.sh`
 
 # Run in Docker container
-1. Run `docker build . -t ansible && docker run --entrypoint=/bin/bash -it ansible`.
-2. From in the docker container run `./bootstrap.sh` to run the ansible playbook.
+```
+docker build -f Dockerfile.manjaro . -t ansible-manjaro && \
+docker run --entrypoint=/bin/bash -it ansible-manjaro
+```
 
 ## You can select tasks with
 To only run tasks that would add personal ssh keys:

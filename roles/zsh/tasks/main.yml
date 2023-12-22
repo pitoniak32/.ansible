@@ -1,7 +1,3 @@
-- name: Install ZSH
-  apt:
-    name: zsh
-
 - name: Clone zsh-* repos into XDG_DATA_HOME
   ansible.builtin.git:
     repo: 'https://github.com/zsh-users/{{ item }}.git'

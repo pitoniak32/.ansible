@@ -18,3 +18,20 @@
       - jq
     state: present
   when: ansible_distribution == "MacOSX"
+
+- name: Update Pacman Mirrors
+  become: true
+  ansible.builtin.shell: pacman-mirrors -c United_States 
+  when: ansible_distribution == "Archlinux"
+
+- name: Install Required CLI tools in Arch/Manjaro
+  become: true
+  community.general.pacman:
+    update_cache: true
+    name:
+      - jq
+      - gcc
+      - cmake
+      - make
+    state: present
+  when: ansible_distribution == "Archlinux"
