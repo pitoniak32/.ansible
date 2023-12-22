@@ -1,0 +1,19 @@
+FROM sickcodes/docker-osx 
+
+# Add non-root user with sudo ability and trivial password
+# Never do this on an actual computer...
+USER root
+RUN sudo echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers
+RUN useradd --create-home davidpi --group wheel && echo "davidpi:p" | chpasswd
+
+USER davidpi
+
+RUN echo "p" | sudo -S /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+RUN (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/davidpi/.bashrc
+RUN eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" && brew install ansible
+
+WORKDIR /tmp
+
+COPY . .
+
+ENTRYPOINT ./bootstrap.sh

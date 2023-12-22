@@ -13,8 +13,8 @@ RUN apt-get update && \
   add-apt-repository ppa:git-core/ppa && apt-get update && apt-get install -y git && \
   pip3 install ansible
 
-
 # Add non-root user with sudo ability and trivial password
+# Never do this on an actual computer...
 RUN useradd --create-home davidpi --group sudo && echo "davidpi:p" | chpasswd
 USER davidpi
 
