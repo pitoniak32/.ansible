@@ -1,0 +1,3 @@
+[submodule "roles/prep_for_dotfiles/vault-vars"]
+	path = roles/prep_for_dotfiles/vault-vars
+	url = git@github.com:pitoniak32/.ansible-vault-vars.git

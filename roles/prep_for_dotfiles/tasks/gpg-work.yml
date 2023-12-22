@@ -1,5 +1,5 @@
 - include_vars:
-    file: vars/work.yml
+    file: vault-vars/work.yml
 
 - name: Copy work gpg secret key to new machine
   ansible.builtin.copy:

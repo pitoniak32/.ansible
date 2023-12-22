@@ -1,5 +1,5 @@
 - include_vars:
-    file: vars/work.yml
+    file: vault-vars/work.yml
 
 - name: Ensure ssh dir exists
   ansible.builtin.file:
