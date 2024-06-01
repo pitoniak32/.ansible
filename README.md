@@ -19,6 +19,11 @@ ansible-playbook to configure a new machine
     - work gpg is still a work in progress due to yubi key gpg.
   - run `./bootstrap.sh`
 
+Once you have your ssh key setup switch the remote so changes can be make via ssh:
+```
+git remote set-url origin git@github.com:pitoniak32/.ansible.git
+```
+
 ## Ansible Vault
 Unlock individual vars
 
