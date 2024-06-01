@@ -16,6 +16,7 @@
         {
           buildInputs = [
             pkgs.ansible
+            pkgs.git
             pkgs.vim
             pkgs.cowsay
             pkgs.lolcat
