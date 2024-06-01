@@ -5,17 +5,17 @@
   ansible.builtin.file:
     path: '{{ansible_env.HOME}}/.ssh'
     state: directory
-    mode: '700'
+    mode: '700' # owner can read & write & execute, all others can do nothing.
 
 - name: Copy personal ssh private key to new machine
   ansible.builtin.copy:
     content: '{{ vault_private_ssh_personal }}'
     dest: '{{ansible_env.HOME}}/.ssh/id_ed25519_personal'
-    mode: '600'
+    mode: '600' # onwer can read & write, all others can do nothing.
 
 - name: Copy personal ssh public key to new machine
   ansible.builtin.copy:
     content: '{{ vault_public_ssh_personal }}'
     dest: '{{ansible_env.HOME}}/.ssh/id_ed25519_personal.pub'
-    mode: '644'
+    mode: '644' # owner can read write, others in same group can read, all others can read
 
