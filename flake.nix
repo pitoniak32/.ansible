@@ -22,6 +22,8 @@
             pkgs.lolcat
           ];
 
+          LC_ALL="C.UTF-8";
+
           shellHook = ''
             ansible-galaxy install -r requirements.yml
             echo "${system}" | cowsay | lolcat
